@@ -1,0 +1,7 @@
+target/
+build/
+dependency-reduced-pom.xml
+*.log
+.DS_Store
+.idea/
+*.iml
