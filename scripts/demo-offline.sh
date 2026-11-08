@@ -5,8 +5,12 @@ SCRIPT_DIR=$(cd "$(dirname "$0")/.." && pwd)
 JAR_PATH="${SCRIPT_DIR}/target/java-jdbc-cursor-rehearsal-0.1.0-standalone.jar"
 
 if [ ! -f "$JAR_PATH" ]; then
-    echo "==> Standalone JAR not found; building offline..."
-    mvn -Dmaven.repo.local="${SCRIPT_DIR}/build/mavenrepo" -o package -DskipTests
+    echo "==> Standalone JAR not found; building..."
+    if [ -d "${SCRIPT_DIR}/build/mavenrepo" ]; then
+        mvn -Dmaven.repo.local="${SCRIPT_DIR}/build/mavenrepo" -o package -DskipTests
+    else
+        mvn package -DskipTests
+    fi
 fi
 
 MODE="${1:-}"
